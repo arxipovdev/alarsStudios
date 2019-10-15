@@ -9,9 +9,11 @@ init = () ->
       error.name = 'invalid name' if attrs.name.length == 0
       error.phone = 'invalid phone' unless phoneRegex.test attrs.phone
       if error.name || error.phone then error else undefined
+#    urlRoot: '/users'
 
   class UserCollection extends Backbone.Collection
     model: User
+#    url: '/users'
 
   item1 = new User {name: 'Andrey', phone: '7-923-230-23-45'}
   item2 = new User {name: 'Ivan', phone: '7-923-345-45-45'}
@@ -44,6 +46,9 @@ init = () ->
         else
           phone.classList.remove 'is-invalid'
           document.querySelector('.userTemplate__phone__error').style.display = 'none'
+        return false
+      else
+        return true
     edit: ->
       hideElement = (element) -> element.hidden = true
       hideElement element for element in document.querySelectorAll '.userTemplate__edit'
@@ -67,7 +72,8 @@ init = () ->
         name: name.value
         phone: phone.value
       , validate: true
-      @validationField @model, name, phone
+      isValid = @validationField @model, name, phone
+#      @model.save() if isValid
     cancel: ->
       userListView.render()
     delete: ->
@@ -83,6 +89,7 @@ init = () ->
       @model.on 'add', @render, @
       @model.on 'change', @changeCollection
       @model.on 'remove', @render, @
+#      @model.fetch()
       @render()
     events: 'click .user__add': 'addUser'
     validationField: (user, name, phone) ->
@@ -99,6 +106,7 @@ init = () ->
         else
           phone.classList.remove 'is-invalid'
           document.querySelector('.user__phone__error').style.display = 'none'
+        return false
       else
         @model.add user
         name.value = ''
@@ -107,6 +115,7 @@ init = () ->
         phone.classList.remove 'is-invalid'
         document.querySelector('.user__name__error').style.display = 'none'
         document.querySelector('.user__phone__error').style.display = 'none'
+        return true
     addUser: ->
       name = document.querySelector '.user__name'
       phone = document.querySelector '.user__phone'
@@ -115,7 +124,8 @@ init = () ->
         name: name.value
         phone: phone.value
       , validate: true
-      @validationField user, name, phone
+      isValid = @validationField user, name, phone
+#      user.save() if isValid
     changeCollection: () ->
       setTimeout ->
         userListView.render()

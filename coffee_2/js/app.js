@@ -94,6 +94,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
     }.call(this);
 
     UserCollection = function () {
+      //    urlRoot: '/users'
       var UserCollection =
       /*#__PURE__*/
       function (_Backbone$Collection) {
@@ -111,7 +112,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
       ;
       UserCollection.prototype.model = User;
       return UserCollection;
-    }.call(this);
+    }.call(this); //    url: '/users'
+
 
     item1 = new User({
       name: 'Andrey',
@@ -163,11 +165,15 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
               if (user.validationError.phone) {
                 phone.classList.add('is-invalid');
-                return document.querySelector('.userTemplate__phone__error').style.display = 'block';
+                document.querySelector('.userTemplate__phone__error').style.display = 'block';
               } else {
                 phone.classList.remove('is-invalid');
-                return document.querySelector('.userTemplate__phone__error').style.display = 'none';
+                document.querySelector('.userTemplate__phone__error').style.display = 'none';
               }
+
+              return false;
+            } else {
+              return true;
             }
           }
         }, {
@@ -208,7 +214,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
         }, {
           key: "save",
           value: function save() {
-            var name, phone;
+            var isValid, name, phone;
             name = document.querySelector('.userTemplate__nameUpdated');
             phone = document.querySelector('.userTemplate__phoneUpdated');
             this.model.set({
@@ -217,8 +223,9 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
             }, {
               validate: true
             });
-            return this.validationField(this.model, name, phone);
-          }
+            return isValid = this.validationField(this.model, name, phone);
+          } //      @model.save() if isValid
+
         }, {
           key: "cancel",
           value: function cancel() {
@@ -269,7 +276,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
           value: function initialize() {
             this.model.on('add', this.render, this);
             this.model.on('change', this.changeCollection);
-            this.model.on('remove', this.render, this);
+            this.model.on('remove', this.render, this); //      @model.fetch()
+
             return this.render();
           }
         }, {
@@ -286,11 +294,13 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
               if (user.validationError.phone) {
                 phone.classList.add('is-invalid');
-                return document.querySelector('.user__phone__error').style.display = 'block';
+                document.querySelector('.user__phone__error').style.display = 'block';
               } else {
                 phone.classList.remove('is-invalid');
-                return document.querySelector('.user__phone__error').style.display = 'none';
+                document.querySelector('.user__phone__error').style.display = 'none';
               }
+
+              return false;
             } else {
               this.model.add(user);
               name.value = '';
@@ -298,13 +308,14 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
               name.classList.remove('is-invalid');
               phone.classList.remove('is-invalid');
               document.querySelector('.user__name__error').style.display = 'none';
-              return document.querySelector('.user__phone__error').style.display = 'none';
+              document.querySelector('.user__phone__error').style.display = 'none';
+              return true;
             }
           }
         }, {
           key: "addUser",
           value: function addUser() {
-            var name, phone, user;
+            var isValid, name, phone, user;
             name = document.querySelector('.user__name');
             phone = document.querySelector('.user__phone');
             user = new User();
@@ -314,8 +325,9 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
             }, {
               validate: true
             });
-            return this.validationField(user, name, phone);
-          }
+            return isValid = this.validationField(user, name, phone);
+          } //      user.save() if isValid
+
         }, {
           key: "changeCollection",
           value: function changeCollection() {
