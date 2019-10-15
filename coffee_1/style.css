@@ -1,0 +1,10 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#canvasBig, #canvasSmall {
+    display: block;
+    border: 1px solid black;
+    background-color: white;
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+<!--    <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.4.0/backbone-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!--    <script src="libs/jquery/dist/jquery.min.js"></script>-->
+<!--    <script src="libs/underscore/underscore-min.js"></script>-->
+<!--    <script src="libs/backbone/backbone-min.js"></script>-->
+<!--    <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>-->
+</head>
+<body>
+    <div class="container">
+        <div class="user">
+            <h3 class="user__title">User list </h3>
+
+            <table class="user__table table table-hover">
+                <thead>
+                    <tr class="user__table__header">
+                        <th class="user__table__title">Name</th>
+                        <th class="user__table__title">Phone</th>
+                        <th class="user__table__title">&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody class="user__list"></tbody>
+                <tfoot>
+                    <tr>
+                        <th>
+                            <input class="user__name form-control form-control-sm" type="text">
+                            <div class="user__name__error invalid-feedback">Обязательное поле</div>
+                        </th>
+                        <th>
+                            <input class="user__phone form-control form-control-sm" type="text">
+                            <div class="user__phone__error invalid-feedback">Введите корректный номер</div>
+                        </th>
+                        <th><button class="user__add btn btn-outline-primary btn-block btn-sm" type="button">add</button></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <script class="userTemplate" type="text/template">
+        <td class="userTemplate__name"><%= name %></td>
+        <td class="userTemplate__phone"><%= phone %></td>
+        <td class="userTemplate__buttons">
+            <button class="userTemplate__edit btn btn-outline-primary btn-sm" type="button">edit</button>
+            <button class="userTemplate__delete btn-outline-danger btn-sm" type="button">delete</button>
+            <button class="userTemplate__save btn btn-outline-primary btn-sm" type="button" hidden>save</button>
+            <button class="userTemplate__cancel btn btn-outline-secondary btn-sm" type="button" hidden>cancel</button>
+        </td>
+    </script>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

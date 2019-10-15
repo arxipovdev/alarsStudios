@@ -1,0 +1,5 @@
+coffee_1/node_modules
+coffee_2/node_modules
+coffee_2/libs
+.idea
+.DS_Store

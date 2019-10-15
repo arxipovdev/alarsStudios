@@ -1,0 +1,9 @@
+.user {
+    margin-top: 40px;
+}
+.user__table__title:nth-child(3) {
+    width: 160px;
+}
+.userTemplate__edit, .userTemplate__delete, .userTemplate__save, .userTemplate__cancel {
+    width: 48%;
+}
